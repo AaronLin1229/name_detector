@@ -1,0 +1,117 @@
+<head>
+	<meta charset="utf-8">
+	<meta name="google" value="notranslate">
+	<title>獸圈雷包名字檢測器</title>
+	<base href="./">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+		body { text-align: center; margin: 0; }
+		textarea { min-height: 64px; min-width: 256px; }
+		div, button, img, label { margin-top: 8px; }
+		button { margin-bottom: 8px; }
+
+        .highlight { color: red; }
+        .rm_nl { display: inline; }
+
+        input[type=text], select {
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button{
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+
+            color: white;
+            cursor: pointer;
+            background-color: #8f8a94;
+        }
+        button:hover{
+            background-color: grey;
+        }
+        .animate__animated{
+            --animate-duration: 1s;
+        }
+	</style>
+	<script>
+		function getResult() {
+            var availableWords = document.querySelector('textarea').value.replaceAll("、", "").replaceAll("，", "").replaceAll(" ", "").replaceAll(",", "");
+            var name = document.getElementById('name').value;
+            var resultEl = document.getElementById("result_blk");
+            var resNameEl = document.getElementById("result_name_colored");
+            var resPercEl = document.getElementById("result_percentage");
+
+            resNameEl.innerHTML = "";
+            resPercEl.innerHTML = "";
+            resPercEl.classList.remove("animate__animated");
+            resPercEl.classList.remove("animate__bounceIn");
+            resPercEl.classList.remove("animate__backInDown");
+
+            var count = 0;
+            for(var i = 0; i < name.length; i++){
+                var tag = document.createElement("h2");
+                tag.innerHTML = name[i];
+                tag.classList.add("rm_nl")
+                if(availableWords.includes(name[i])){
+                    tag.classList.add('highlight');
+                    count += 1;
+                }
+                resNameEl.appendChild(tag);
+            }
+
+            var percent = Math.round((100 * count / name.length) * 100) / 100
+
+            if(percent == 100){
+                resPercEl.innerHTML = "恭喜你，你是百分之百的純種雷包！";
+                // resPercEl.className = "animate__animated animate__backInDown";
+
+                resPercEl.classList.add('animate__animated','animate__tada');
+                setTimeout(function(){
+                    resPercEl.classList.remove('animate__animated','animate__tada');
+                }, 1000)
+            }
+            else{
+                resPercEl.innerHTML = "你是" + percent.toString() + "%的雷包！";
+                // resPercEl.className = "animate__animated animate__bounceIn";
+
+                resPercEl.classList.add('animate__animated','animate__bounceIn');
+                setTimeout(function() {
+                    resPercEl.classList.remove('animate__animated','animate__bounceIn');
+                }, 1000)
+            }
+
+            resultEl.style.display = 'block';
+            // resPercEl.classList.remove("animate__animated");
+            // resPercEl.classList.remove("animate__bounceIn");
+            // resPercEl.classList.remove("animate__backInDown");
+
+        }
+}
+	</script>
+</head>
+
+<body>
+	<div class = "title"> <h1>獸圈雷包名字檢測器</h1> </div>
+    <div class = "prep_area">
+        <div> <textarea>雷、雪、風、沃、亞、卡、烏、音、白、瑟、特、嵐、凱、狐、魯、爾、天、吉、斯、路、歐、犬、小、克、幻、狼、洛、雨、星、靈、阿、羽、夢、焰、貓、利、木、太、姆、恩、哈、谷、墨、冰、喵、摩、拉、龍、提、空</textarea>  </div>
+        <div> <input type="text" id= "name" placeholder = "輸入你的名字...">
+        <button onclick = "getResult();"> 計算 </button> </div>
+    </div>
+
+    <div class = "res_area">
+        <div class = "result" id = "result_blk" style = "display: none;">
+            <h2 id = "result_name_colored"></h2>
+            <h2 id = "result_percentage"></h2>
+        </div>
+    </div>
+</body>
