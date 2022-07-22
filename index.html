@@ -42,6 +42,7 @@
         .animate__animated{
             --animate-duration: 1s;
         }
+
 	</style>
 	<script>
 		function getResult() {
@@ -71,12 +72,14 @@
 
             var percent = Math.round((100 * count / name.length) * 100) / 100
 
+
+
             if(percent == 100){
                 resPercEl.innerHTML = "恭喜你，你是百分之百的純種雷包！";
                 // resPercEl.className = "animate__animated animate__backInDown";
 
                 resPercEl.classList.add('animate__animated','animate__tada');
-                setTimeout(function(){
+                setTimeout(function() {
                     resPercEl.classList.remove('animate__animated','animate__tada');
                 }, 1000)
             }
@@ -96,7 +99,6 @@
             // resPercEl.classList.remove("animate__backInDown");
 
         }
-}
 	</script>
 </head>
 
