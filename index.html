@@ -4,7 +4,6 @@
 	<title>獸圈雷包名字檢測器</title>
 	<base href="./">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="main.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <style>
@@ -74,7 +73,7 @@
 
 
 
-            if(percent == 100){
+            if(percent === 100){
                 resPercEl.innerHTML = "恭喜你，你是百分之百的純種雷包！";
                 // resPercEl.className = "animate__animated animate__backInDown";
 
@@ -82,6 +81,9 @@
                 setTimeout(function() {
                     resPercEl.classList.remove('animate__animated','animate__tada');
                 }, 1000)
+            }
+            if(isNaN(percent)){
+                resPercEl.innerHTML = "未輸入名字";
             }
             else{
                 resPercEl.innerHTML = "你是" + percent.toString() + "%的雷包！";
@@ -106,8 +108,8 @@
 	<div class = "title"> <h1>獸圈雷包名字檢測器</h1> </div>
     <div class = "prep_area">
         <div> <textarea>雷、雪、風、沃、亞、卡、烏、音、白、瑟、特、嵐、凱、狐、魯、爾、天、吉、斯、路、歐、犬、小、克、幻、狼、洛、雨、星、靈、阿、羽、夢、焰、貓、利、木、太、姆、恩、哈、谷、墨、冰、喵、摩、拉、龍、提、空</textarea>  </div>
-        <div> <input type="text" id= "name" placeholder = "輸入你的名字...">
-        <button onclick = "getResult();"> 計算 </button> </div>
+        <div> <input type="text" id="name" placeholder = "輸入你的名字...">
+        <button onclick="getResult();" id="submit"> 計算 </button> </div>
     </div>
 
     <div class = "res_area">
